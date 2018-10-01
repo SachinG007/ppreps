@@ -1,0 +1,41 @@
+/*Please note that it's Function problem i.e.
+you need to write your solution in the form of Function(s) only.
+Driver Code to call/invoke your function is mentioned above.*/
+
+/* A binary tree node has data, pointer to left child
+   and a pointer to right child  
+struct Node {
+    int data;
+    Node* left, * right;
+}; */
+/* Should return true if tree represented by root is BST. 
+   For example, return  value should be 1 for following tree.
+         20
+     /      \ 
+   10       30
+  and return value should be 0 for following tree.
+         10
+     /      \ 
+   20       30 */
+   
+bool isBSTUtil2(Node *root, int l, int r){
+    
+    if(root == NULL){
+        return true;
+    }
+    
+    if(root->data < l){
+        return false;
+    }
+    if(root->data > r){
+        return false;
+    }
+    
+    return isBSTUtil2(root->left,l,root->data) && isBSTUtil2(root->right, root->data, r);
+    
+}
+
+bool isBST(Node* root) {
+    // Your code here
+    return isBSTUtil2(root, INT_MIN, INT_MAX);
+}
