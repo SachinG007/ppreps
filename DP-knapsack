@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+int Util(int N, int W, int val[], int weight[]){
+    
+    if(N==0 || W==0){
+        return 0;
+    }
+    
+    if(weight[N-1]>W){
+        return Util(N-1, W, val, weight);
+    }
+    else return std::max(val[N-1] + Util(N-1, W - weight[N-1], val, weight), Util(N-1, W, val, weight));
+}
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int N,W;
+	    cin>>N;
+	    cin>>W;
+	    int *val = new int[N];
+	    int *weight = new int[N];
+	    
+	    for(int i =0;i<N;i++){
+	        cin >> val[i];
+	    }
+	    for(int i =0;i<N;i++){
+	        cin >> weight[i];
+	    }
+	    
+
+	    cout << Util(N,W,val,weight) << endl;
+	}
+	
+	return 0;
+}
